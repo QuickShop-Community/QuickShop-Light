@@ -18,8 +18,13 @@ package net.tnemc.api.model.shop;
  */
 
 import net.tnemc.api.model.history.HistoryKeeper;
+import net.tnemc.item.SerialItem;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -31,23 +36,65 @@ import java.util.UUID;
 public interface Shop extends HistoryKeeper {
 
   /**
+   * Retrieves the tags associated with a shop.
+   *
+   * @return a List of String objects representing the tags of the shop.
+   */
+  List<String> tags();
+
+  /**
+   * Retrieves the functionality information of this object.
+   *
+   * @return a Map where keys are String descriptions and values are Boolean flags indicating the functionality status.
+   */
+  Map<String, Boolean> functionality();
+
+  /**
    * Retrieves the identifier for the shop.
    *
    * @return a UUID representing the identifier of the shop.
    */
-  UUID identifier();
+  @NotNull UUID identifier();
+
+  /**
+   * Retrieves the currency used by this shop.
+   *
+   * @return the currency as a String, or null if no currency is set
+   */
+  @Nullable String currency();
+
+  /**
+   * Sets the currency used by this shop.
+   *
+   * @param currency the new currency to be set, or null if no currency is to be set
+   */
+  void setCurrency(@Nullable String currency);
 
   /**
    * Retrieves the price of the item.
    *
    * @return the price of the item as a BigDecimal.
    */
-  BigDecimal price();
+  @NotNull BigDecimal price();
 
   /**
    * Sets the price of the item in the shop.
    *
    * @param price the new price of the item
    */
-  void setPrice(BigDecimal price);
+  void setPrice(@NotNull final BigDecimal price);
+
+  /**
+   * Retrieves the item associated with the shop as a SerialItem.
+   *
+   * @return the item associated with the shop as a SerialItem
+   */
+  SerialItem<?> item();
+
+  /**
+   * Sets the item in the shop to the provided item.
+   *
+   * @param item the SerialItem to be set in the shop
+   */
+  void setItem(@NotNull final SerialItem<?> item);
 }

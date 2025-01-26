@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.model.shop.limiter;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,43 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
- * Interface for classes that store and manage history entries.
+ * PriceLimiterCheck
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
+public interface PriceLimiterCheckResult {
 
   /**
-   * Retrieves the history entries stored in the HistoryKeeper.
+   * Retrieves the maximum price allowed for this item.
    *
-   * @return a List of HistoryEntry objects representing the history entries.
+   * @return the maximum value as a BigDecimal
    */
-  List<HistoryEntry> getHistory();
+  BigDecimal max();
 
   /**
-   * Adds a new history entry to the HistoryKeeper.
+   * Retrieves the minimum price allowed for this item.
    *
-   * @param entry the history entry to be added
+   * @return the minimum value as a BigDecimal
    */
-  void addEntry(@NotNull final HistoryEntry entry);
+  BigDecimal min();
+
+  /**
+   * Retrieves the result of the price limiting operation.
+   *
+   * @return the result of the price limiting operation as a PriceLimiterResult enum value
+   */
+  PriceLimiterResult result();
+
+  enum PriceLimiterResult {
+    PASS,
+    REACHED_PRICE_MAX_LIMIT,
+    REACHED_PRICE_MIN_LIMIT,
+    PRICE_RESTRICTED,
+    NOT_A_WHOLE_NUMBER,
+    NOT_VALID
+  }
 }

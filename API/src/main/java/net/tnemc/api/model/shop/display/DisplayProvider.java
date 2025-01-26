@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.model.shop.display;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,39 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.api.model.shop.Shop;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+import org.jetbrains.annotations.Nullable;
 
 /**
- * Interface for classes that store and manage history entries.
+ * DisplayProvider
+ *
+ * @param <T> The implementation's plugin/mod object.
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
+public interface DisplayProvider<T> {
 
   /**
-   * Retrieves the history entries stored in the HistoryKeeper.
+   * Retrieves the identifier for the implementation.
    *
-   * @return a List of HistoryEntry objects representing the history entries.
+   * @return a String representing the identifier
    */
-  List<HistoryEntry> getHistory();
+  @NotNull String identifier();
 
   /**
-   * Adds a new history entry to the HistoryKeeper.
+   * Retrieves the provider associated with this DisplayProvider.
    *
-   * @param entry the history entry to be added
+   * @return The implementation's plugin/mod object.
    */
-  void addEntry(@NotNull final HistoryEntry entry);
+  @NotNull T getProvider();
+
+  /**
+   * Provides a DisplayItem based on the given Shop.
+   *
+   * @param shop the Shop object to use for providing the DisplayItem
+   * @return the DisplayItem generated based on the provided Shop, or null if unable to provide
+   */
+  @Nullable DisplayItem provide(@NotNull Shop shop);
 }

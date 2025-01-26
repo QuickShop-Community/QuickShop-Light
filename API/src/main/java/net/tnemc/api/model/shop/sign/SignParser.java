@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.model.shop.sign;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,36 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
+import net.tnemc.item.SerialItem;
 
 /**
- * Interface for classes that store and manage history entries.
+ * SignParser
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
+public interface SignParser {
 
   /**
-   * Retrieves the history entries stored in the HistoryKeeper.
+   * This method returns the identifier associated with a given SignParser implementation.
    *
-   * @return a List of HistoryEntry objects representing the history entries.
+   * @return The identifier of the SignParser.
    */
-  List<HistoryEntry> getHistory();
+  String identifier();
 
   /**
-   * Adds a new history entry to the HistoryKeeper.
+   * Checks if the given ItemStack item meets certain criteria for this parser to be applicable.
    *
-   * @param entry the history entry to be added
+   * @param item The ItemStack item to be checked.
+   * @return true if the criteria is met, false otherwise.
    */
-  void addEntry(@NotNull final HistoryEntry entry);
+  boolean applies(final SerialItem<?> item);
+
+  /**
+   * Parses a given ItemStack item into a Component for display on a shop sign.
+   *
+   * @param item The ItemStack item to be parsed into a Component.
+   * @return The parsed String representing the given ItemStack item.
+   */
+  String parse(final SerialItem<?> item);
 }

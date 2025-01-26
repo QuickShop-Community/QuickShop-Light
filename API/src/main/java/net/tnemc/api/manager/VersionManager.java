@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.manager;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,30 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jetbrains.annotations.NotNull;
+import net.tnemc.api.model.version.Version;
 
-import java.util.List;
+import java.util.Map;
 
 /**
- * Interface for classes that store and manage history entries.
+ * VersionManager
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
+public interface VersionManager {
 
   /**
-   * Retrieves the history entries stored in the HistoryKeeper.
+   * Retrieves a map of software versions.
    *
-   * @return a List of HistoryEntry objects representing the history entries.
+   * @return A map where the keys are version identifiers and the values are Version objects representing each software version.
    */
-  List<HistoryEntry> getHistory();
+  Map<String, Version> versions();
 
   /**
-   * Adds a new history entry to the HistoryKeeper.
+   * Check if a given version is supported by the software.
    *
-   * @param entry the history entry to be added
+   * @param version the version to be checked for support
+   * @return true if the version is supported, false otherwise
    */
-  void addEntry(@NotNull final HistoryEntry entry);
+  boolean isSupported(final String version);
 }

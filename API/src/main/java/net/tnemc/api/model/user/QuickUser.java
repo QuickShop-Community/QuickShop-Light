@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.model.user;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,11 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
 /**
- * Interface for classes that store and manage history entries.
+ * QuickUser
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
-
-  /**
-   * Retrieves the history entries stored in the HistoryKeeper.
-   *
-   * @return a List of HistoryEntry objects representing the history entries.
-   */
-  List<HistoryEntry> getHistory();
-
-  /**
-   * Adds a new history entry to the HistoryKeeper.
-   *
-   * @param entry the history entry to be added
-   */
-  void addEntry(@NotNull final HistoryEntry entry);
+public class QuickUser {
 }

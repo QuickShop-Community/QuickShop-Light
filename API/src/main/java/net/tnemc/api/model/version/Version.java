@@ -1,4 +1,4 @@
-package net.tnemc.api.model.history;
+package net.tnemc.api.model.version;
 /*
  * QuickShop-Light
  * Copyright (C) 2024 Daniel "creatorfromhell" Vidmar
@@ -17,30 +17,29 @@ package net.tnemc.api.model.history;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import net.tnemc.api.model.location.SerializableLocation;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-
 /**
- * Interface for classes that store and manage history entries.
+ * Version
  *
  * @author creatorfromhell
  * @since 0.0.1.0
- * @see HistoryEntry
  */
-public interface HistoryKeeper {
+public interface Version {
 
   /**
-   * Retrieves the history entries stored in the HistoryKeeper.
+   * Retrieves the version of the software.
    *
-   * @return a List of HistoryEntry objects representing the history entries.
+   * @return A non-null String representing the version of the software.
    */
-  List<HistoryEntry> getHistory();
+  @NotNull String version();
 
   /**
-   * Adds a new history entry to the HistoryKeeper.
+   * Spawns a virtual display at the specified location.
    *
-   * @param entry the history entry to be added
+   * @param location The SerializableLocation object representing the location where the virtual display should be spawned.
+   * @return true if the virtual display was successfully spawned, false otherwise.
    */
-  void addEntry(@NotNull final HistoryEntry entry);
+  boolean spawnVirtualDisplay(@NotNull SerializableLocation location);
 }
